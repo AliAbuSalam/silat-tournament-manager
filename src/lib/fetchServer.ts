@@ -5,9 +5,20 @@ const fetchServer = async (path: string, options?: {
     tags: string[]
   }
 }) => {
-  const serverUrl = 'http://localhost:3000'
-  const address = new URL(path, serverUrl);
-  return await fetch(address, options);
+  try {
+    const serverUrl = 'http://localhost:8000'
+    const address = new URL(path, serverUrl);
+    const response = await fetch(address, options);
+    return response;
+  } catch(error){
+    return {
+      status: 'error',
+      errorObject: error
+    } satisfies {
+      status: 'error',
+      errorObject: Error | unknown
+    }
+  }
 }
 
 export default fetchServer;

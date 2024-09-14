@@ -1,9 +1,31 @@
-import EventOnGoing from '../components/EventBox';
+import EventOnGoing from '@/components/EventBox';
+import type { AllEvents } from '@/typing/event';
+import { Suspense } from 'react';
 
-const home = () => {
+import fetchServer from '@/lib/fetchServer';
+
+
+const home = async () => {
+  let res = await fetchServer('/event/all'); 
+  let errorObject;
+  let event;
+  if(res.status === 'error'){
+    errorObject = res.errorObject;
+  } else {
+    res = res as Response;
+    if(res.status !== 200){
+      errorObject = res.status;
+    } else {
+      event = await res.json() as AllEvents
+    }
+  }
+
   return(
     <main>
-      <EventOnGoing title='Event yang sedang berlangsung'/>
+      {event ? 
+        <EventOnGoing title='Event yang sedang berlangsung' events={event.ongoing}/>
+        : <>error occured!</>
+      }
     </main>
   )
 }
