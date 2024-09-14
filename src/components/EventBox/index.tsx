@@ -1,9 +1,14 @@
 'use client'
 import { useState } from 'react';
+import EventDetails from './EventDetails';
 
-const EventBox = ({ title }: {
-  title: string
+import type { Event } from '@/typing/event';
+
+const EventBox = ({ title, events }: {
+  title: string,
+  events: Event[]
 }) => {
+  console.log('events: ', events)
   const [open, setOpen] = useState(true);
   const handleCollapse = () => {
     setOpen(!open)
@@ -18,11 +23,7 @@ const EventBox = ({ title }: {
           <span className="material-symbols-outlined text-[36px]">{open ? 'keyboard_arrow_up': 'keyboard_arrow_down'}</span>
       </div>
       <div className={open ? "": "hidden"}>
-        test<br/>
-        test<br/>
-        test<br/>
-        test<br/>
-        test<br/>
+        {events.map((e) => <EventDetails key={e.id} event={e}/>)}
       </div>
     </div>
   );
