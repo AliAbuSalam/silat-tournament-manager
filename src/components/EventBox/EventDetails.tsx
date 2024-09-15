@@ -45,7 +45,7 @@ const EventDetails = ({ event }: {
       {event.eventName}<br/>
       {parseDate(event.dateStart)} - {parseDate(event.dateEnd)}<br />
       {isOpen ? 
-      <>Pendaftaran dibuka selama {timer?.days} hari {timer?.hours} jam {timer?.minutes} minutes</>: 
+      <>Pendaftaran dibuka selama {timer?.days} hari {timer?.hours} jam {timer?.minutes} menit</>: 
       <>Pendaftaran telah ditutup</>}
 
     </div>
