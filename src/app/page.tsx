@@ -1,4 +1,4 @@
-import EventOnGoing from '@/components/EventBox';
+import EventBox from '@/components/EventBox';
 import type { AllEvents } from '@/typing/event';
 import { Suspense } from 'react';
 
@@ -23,7 +23,10 @@ const home = async () => {
   return(
     <main>
       {event ? 
-        <EventOnGoing title='Event yang sedang berlangsung' events={event.ongoing}/>
+        <>
+          <EventBox title='Event yang sedang berlangsung' events={event.ongoing}/>
+          <EventBox title='Event lama' events={event.finished}/>
+        </>
         : <>error occured!</>
       }
     </main>
